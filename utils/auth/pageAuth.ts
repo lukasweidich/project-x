@@ -19,7 +19,7 @@ export const protectRoute = (
 		req,
 	);
 
-	const allRequirementsMet = doesUserMeetAllRequirements(
+	const allRequirementsMet = await doesUserMeetAllRequirements(
 		user,
 		userRequirements,
 	);
@@ -27,11 +27,7 @@ export const protectRoute = (
 	if (!token) {
 		return {
 			redirect: {
-				/**
-				 * destination: `/login?redirect=${resolvedUrl}`,
-				 * if there is a log in or sign up page, take user there.
-				 */
-				destination: `/`,
+				destination: `/login?redirect=${resolvedUrl}`,
 				statusCode: 302,
 			},
 		};

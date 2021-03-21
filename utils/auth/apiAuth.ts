@@ -26,7 +26,7 @@ export const executeIfUserRequirementsMet = async (
 	res: NextApiResponse,
 	fn = async () => null,
 ): Promise<void> => {
-	const allRequirementsMet = doesUserMeetAllRequirements(
+	const allRequirementsMet = await doesUserMeetAllRequirements(
 		user,
 		userRequirements,
 	);
