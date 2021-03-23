@@ -13,7 +13,7 @@ import PasswordInput from "../components/form/PasswordInput";
 import { useDispatch } from "react-redux";
 import { saveCookie } from "../utils/cookies";
 import { logIn } from "../actions/authActions";
-import { CookieNames } from "../utils/constants";
+import { CookieNames, PathNames, REDIRECT_PARAM } from "../utils/constants";
 import { useRouter } from "next/dist/client/router";
 import useRedirectParam from "../hooks/useRedirectParam";
 import {
@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/form-control";
 import InternalLink from "../components/link/InternalLink";
 const { COOKIE_CONSENT } = CookieNames;
+const { SIGNUP } = PathNames;
 
 const login = () => {
 	const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const login = () => {
 
 	return (
 		<Container>
-			<Box borderRadius="lg" borderWidth="1px" p="6" marginTop="42">
+			<Box borderRadius="lg" borderWidth="1px" p="6">
 				<form onSubmit={(e) => handleLogIn(e)}>
 					<SimpleGrid columns={1} spacing={6}>
 						<Heading>Login</Heading>
@@ -83,7 +84,7 @@ const login = () => {
 						<Divider />
 						<FormControl id="signup">
 							<FormLabel>Don't have an Account?</FormLabel>
-							<InternalLink href="#">
+							<InternalLink href={`${SIGNUP}?${REDIRECT_PARAM}=${redirect}`}>
 								<Button variant="outline" style={{ width: "100%" }}>
 									Sign Up
 								</Button>

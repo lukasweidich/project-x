@@ -33,6 +33,11 @@ UserSchema.methods.matchPassword = function matchPassword(
 	return bcrypt.compareSync(enteredPassword, this.password);
 };
 
+/**
+ * TODO:
+ * password is not being encrypted when updated using put request
+ *  */
+
 UserSchema.pre<UserInterface>("save", async function (next) {
 	if (!this.isModified("password")) {
 		next();

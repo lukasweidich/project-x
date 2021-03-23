@@ -12,12 +12,10 @@ export const logIn = (username: string, password: string) => async (
 		username,
 		password,
 	);
-
 	dispatch({
 		type: LOG_IN,
 		payload: { token, user },
 	});
-
 	saveCookie(TOKEN, token);
 	saveCookie(USER, user);
 };

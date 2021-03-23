@@ -1,9 +1,10 @@
 import User, { UserInterface } from "../../../db/types/User";
 import generateToken from "../../../utils/auth/generateToken";
 import { connect } from "../../../utils/db";
+import { NextApiRequest, NextApiResponse } from "next";
 connect();
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const {
 		body: { username, password },
 		method,

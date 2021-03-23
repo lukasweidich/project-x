@@ -20,7 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		async (user, token) => {
 			await executeIfUserRequirementsMet(
 				user,
-				[async (user) => user.isAdmin || isEqual(String(userId), user._id)],
+				[(user) => user.isAdmin || isEqual(String(userId), user._id)],
 				req,
 				res,
 				async () => {

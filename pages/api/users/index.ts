@@ -21,7 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				async (user, token) => {
 					await executeIfUserRequirementsMet(
 						user,
-						[async (user) => user.isAdmin],
+						[(user) => user.isAdmin],
 						req,
 						res,
 						async () => {

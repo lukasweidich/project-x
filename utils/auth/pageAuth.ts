@@ -4,6 +4,9 @@ import { connect } from "../db";
 import { UserRequirementFunction } from "./apiAuth";
 import { InitialAuthReducerStateInterface } from "./../../reducers/authReducer";
 import { doesUserMeetAllRequirements } from "../misc";
+import { PathNames, REDIRECT_PARAM, CookieNames } from "../constants";
+const { LOGIN } = PathNames;
+const { TOKEN } = CookieNames;
 require("dotenv").config();
 connect();
 
@@ -27,7 +30,7 @@ export const protectRoute = (
 	if (!token) {
 		return {
 			redirect: {
-				destination: `/login?redirect=${resolvedUrl}`,
+				destination: `${LOGIN}?${REDIRECT_PARAM}=${resolvedUrl}`,
 				statusCode: 302,
 			},
 		};
@@ -46,13 +49,13 @@ export const protectRoute = (
 const getTokenAndUserInfoFromRequest = async (
 	request,
 ): Promise<InitialAuthReducerStateInterface> => {
-	const defaultReturn: InitialAuthReducerStateInterface = {
+	const defaultAuth: InitialAuthReducerStateInterface = {
 		user: null,
 		token: null,
 	};
 
 	const {
-		cookies: { token },
+		cookies: { [TOKEN]: token },
 	} = request;
 	if (token) {
 		const sanitizedToken: string = removeDoubleQuotesFromToken(token);
@@ -65,15 +68,15 @@ const getTokenAndUserInfoFromRequest = async (
 				decoded.id,
 			);
 			return {
-				...defaultReturn,
+				...defaultAuth,
 				user: correspondingUserInDb,
 				token: sanitizedToken,
 			};
 		} catch (err) {
-			return defaultReturn;
+			return defaultAuth;
 		}
 	} else {
-		return defaultReturn;
+		return defaultAuth;
 	}
 };
 

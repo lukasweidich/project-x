@@ -9,8 +9,8 @@ export type UserRequirementFunction = (
 ) => Promise<boolean> | boolean;
 
 interface UserIdAndBearerTokenInterface {
-	id: string;
-	token: string;
+	id: string | null;
+	token: string | null;
 }
 
 interface ValidateBearerTokenInterface {
@@ -72,14 +72,14 @@ const validateBearerToken = async (
 
 const getUserIdAndBearerTokenFromAuth = (
 	authorization: string,
-): UserIdAndBearerTokenInterface | null => {
+): UserIdAndBearerTokenInterface => {
 	try {
 		const token = authorization.split(" ")[1];
 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
 		const { id } = decoded;
 		return { id, token };
 	} catch (error) {
-		return null;
+		return { id: null, token: null };
 	}
 };
 
