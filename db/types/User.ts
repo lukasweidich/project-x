@@ -33,17 +33,12 @@ UserSchema.methods.matchPassword = function matchPassword(
 	return bcrypt.compareSync(enteredPassword, this.password);
 };
 
-/**
- * TODO:
- * password is not being encrypted when updated using put request
- *  */
-
 UserSchema.pre<UserInterface>("save", async function (next) {
-	if (!this.isModified("password")) {
-		next();
+	if (this.isModified("password")) {
+		const salt = await bcrypt.genSalt(10);
+		this.password = await bcrypt.hash(this.password, salt);
 	}
-	const salt = await bcrypt.genSalt(10);
-	this.password = await bcrypt.hash(this.password, salt);
+	next();
 });
 
 export default models[schemaName] || model(schemaName, UserSchema);

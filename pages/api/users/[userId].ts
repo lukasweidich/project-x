@@ -39,14 +39,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 							break;
 
 						case "PUT":
-							const { user } = req.body;
-							let userWithoutId: UserInterface = { ...user };
-							delete userWithoutId._id;
 							try {
-								// @ts-ignore
-								await User.findByIdAndUpdate(userId, {
-									...userWithoutId,
-								});
+								/**
+								 * do not overwrite isAdmin and _id
+								 */
+								const {
+									user: { isAdmin, _id, ...userPropertiesFromRequest },
+								}: { user: UserInterface } = req.body;
+
+								const userFromDb = await User.findById(userId);
+
+								Object.keys(userPropertiesFromRequest).forEach(
+									(property) =>
+										(userFromDb[property] =
+											userPropertiesFromRequest[property]),
+								);
+
+								await userFromDb.save();
 								res.statusCode = 204;
 								res.end();
 							} catch (error) {
