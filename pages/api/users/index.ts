@@ -27,11 +27,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 						async () => {
 							try {
 								const users: UserInterface[] = await User.find({});
-								res.statusCode = 200;
-								res.json({ users });
+								res.status(200).json({ users });
 							} catch (error) {
-								res.statusCode = 404;
-								res.json({
+								res.status(404).json({
 									error: `Could not find any users. MongoDB: ${error}`,
 								});
 							}
@@ -57,11 +55,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 			try {
 				const createdUser: UserInterface = await User.create({ ...user });
-				res.statusCode = 201;
-				res.json({ user: createdUser });
+				res.status(201).json({ user: createdUser });
 			} catch (error) {
-				res.statusCode = 409;
-				res.json({
+				res.status(409).json({
 					error: `Could not create user. MongoDB: ${error}`,
 				});
 			}

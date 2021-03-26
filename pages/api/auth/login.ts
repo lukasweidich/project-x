@@ -17,26 +17,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					const user: UserInterface = await User.findOne({ username });
 					// @ts-ignore
 					if (user && (await user.matchPassword(password))) {
-						res.statusCode = 200;
-						res.json({
+						res.status(200).json({
 							user,
 							token: generateToken(user._id),
 						});
 					} else {
-						res.statusCode = 401;
-						res.json({
+						res.status(401).json({
 							error: `Invalid email or password.`,
 						});
 					}
 				} else {
-					res.statusCode = 401;
-					res.json({
+					res.status(401).json({
 						error: `Request was either missing email or password.`,
 					});
 				}
 			} catch (error) {
-				res.statusCode = 401;
-				res.send(error.message);
+				res.status(401).send(error.message);
 			}
 			break;
 		default:

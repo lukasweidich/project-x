@@ -28,11 +28,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 						case "GET":
 							try {
 								const user: UserInterface = await User.findById(userId);
-								res.statusCode = 200;
-								res.json({ user });
+								res.status(200).json({ user });
 							} catch (error) {
-								res.statusCode = 404;
-								res.json({
+								res.status(404).json({
 									error: `Could not find any users. MongoDB: ${error}`,
 								});
 							}
@@ -56,11 +54,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 								);
 
 								await userFromDb.save();
-								res.statusCode = 204;
-								res.end();
+								res.status(204).end();
 							} catch (error) {
-								res.statusCode = 409;
-								res.json({
+								res.status(409).json({
 									error: `Could not update user with id ${userId}. MongoDB: ${error}`,
 								});
 							}
@@ -69,11 +65,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 						case "DELETE":
 							try {
 								await User.findByIdAndDelete(userId);
-								res.statusCode = 204;
-								res.end();
+								res.status(204).end();
 							} catch (error) {
-								res.statusCode = 409;
-								res.json({
+								res.status(409).json({
 									error: `Could not delete user with id ${userId}. MongoDB: ${error}`,
 								});
 							}
