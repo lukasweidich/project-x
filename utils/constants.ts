@@ -15,6 +15,7 @@ export enum CookieNames {
 	USER = "usr",
 	TOKEN = "tkn",
 	THEME = "thm",
+	LANGUAGE = "lng",
 }
 
 export const EXPIRY_IN_DAYS: number = 30;

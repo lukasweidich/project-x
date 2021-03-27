@@ -1,0 +1,23 @@
+{
+	"login": {
+		"title": "Log In",
+		"desc": "Enter username and password to continue.",
+		"cta": "Already have an Account?",
+		"forgotPassword": "Forgot Password?"
+	},
+	"signup": {
+		"title": "Sign Up",
+		"desc": "Enter your information.",
+		"cta": "Don't have an Account?"
+	},
+	"attributes": {
+		"firstName": { "label": "First Name", "placeholder": "Enter First Name" },
+		"lastName": { "label": "Last Name", "placeholder": "Enter Last Name" },
+		"username": { "label": "Username", "placeholder": "Enter Username" },
+		"password": { "label": "Password", "placeholder": "Enter Password" },
+		"repeatPassword": {
+			"label": "Repeat Password",
+			"placeholder": "Enter Password again"
+		}
+	}
+}

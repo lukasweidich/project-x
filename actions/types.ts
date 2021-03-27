@@ -6,3 +6,7 @@ export enum AuthActions {
 export enum ThemeActions {
 	SET_THEME = "SET_THEME",
 }
+
+export enum LanguageActions {
+	SET_LANGUAGE = "SET_LANGUAGE",
+}

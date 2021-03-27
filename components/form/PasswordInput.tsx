@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/button";
+import { IconButton } from "@chakra-ui/button";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
 	Input,
@@ -12,13 +12,22 @@ import React, { useState } from "react";
 const PasswordInput = ({ ...props }: ComponentWithAs<"input", InputProps>) => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const handleClick = () => setShowPassword(!showPassword);
+
+	const ariaLabelForIconButton = `Click to ${
+		showPassword ? "hide" : "show"
+	} password.`;
+
 	return (
 		<InputGroup>
 			<Input {...props} type={showPassword ? "text" : "password"} />
 			<InputRightElement>
-				<Button onClick={handleClick} size="xs" tabIndex={-1}>
-					{showPassword ? <ViewOffIcon /> : <ViewIcon />}
-				</Button>
+				<IconButton
+					size="xs"
+					tabIndex={-1}
+					aria-label={ariaLabelForIconButton}
+					onClick={handleClick}
+					icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
+				/>
 			</InputRightElement>
 		</InputGroup>
 	);

@@ -13,6 +13,8 @@ import ExternalLink from "./../link/ExternalLink";
 import Container from "./Container";
 import { SPACING_IN_PX } from "./../../utils/constants";
 import ToggleThemeButton from "../theme/ToggleThemeButton";
+import LanguageSelector from "../language/LanguageSelector";
+import { HStack } from "@chakra-ui/react";
 
 const Footer = () => {
 	return (
@@ -32,7 +34,10 @@ const Footer = () => {
 							</Text>
 						</WrapItem>
 						<WrapItem>
-							<ToggleThemeButton />
+							<HStack spacing={SPACING_IN_PX}>
+								<LanguageSelector />
+								<ToggleThemeButton />
+							</HStack>
 						</WrapItem>
 					</Wrap>
 				</Box>

@@ -1,0 +1,26 @@
+{
+	"login": {
+		"title": "Anmelden",
+		"desc": "Bitte mit Nutzername und Passwort anmelden.",
+		"cta": "Mit bestehendem Account anmelden?",
+		"forgotPassword": "Passwort vergessen?"
+	},
+	"signup": {
+		"title": "Registrieren",
+		"desc": "Daten angeben und Account erstellen.",
+		"cta": "Noch keinen Account?"
+	},
+	"attributes": {
+		"firstName": { "label": "Vorname", "placeholder": "Vornamen eingeben" },
+		"lastName": { "label": "Nachname", "placeholder": "Nachnamen eingeben" },
+		"username": {
+			"label": "Nutzername",
+			"placeholder": "Nutzernamen eingeben"
+		},
+		"password": { "label": "Passwort", "placeholder": "Passwort eingeben" },
+		"repeatPassword": {
+			"label": "Passwort wiederholen",
+			"placeholder": "Passwort erneut eingeben"
+		}
+	}
+}

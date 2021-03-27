@@ -24,6 +24,7 @@ const signup = () => {
 	const [username, setUsername] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 	const [repeatPassword, setRepeatPassword] = useState<string>("");
+	const [signingUp, setSigningUp] = useState<boolean>(false);
 
 	const router = useRouter();
 	const redirect = useRedirectParam();
@@ -37,20 +38,22 @@ const signup = () => {
 		password.length > 0 &&
 		passwordsMatch;
 
-	const handleLogIn = async (
+	const handleSignIn = async (
 		e: React.FormEvent<HTMLFormElement>,
 	): Promise<void> => {
 		e.preventDefault();
 		if (credentialsEntered) {
+			setSigningUp(true);
 			await createUserInDb(firstName, lastName, username, password);
 			await router.push(redirect);
+			setSigningUp(false);
 		}
 	};
 
 	return (
 		<Container>
 			<Box borderRadius="lg" borderWidth="1px" p={SPACING_IN_PX}>
-				<form onSubmit={(e) => handleLogIn(e)}>
+				<form onSubmit={(e) => handleSignIn(e)}>
 					<SimpleGrid columns={1} spacing={6}>
 						<Heading>Sign Up</Heading>
 						<Text color="gray.500">Enter your information.</Text>
@@ -105,7 +108,12 @@ const signup = () => {
 								required
 							/>
 						</FormControl>
-						<Button disabled={!credentialsEntered} type="submit">
+						<Button
+							disabled={!credentialsEntered}
+							type="submit"
+							isLoading={signingUp}
+							loadingText="Signing Up"
+						>
 							Sign Up
 						</Button>
 						<Divider />

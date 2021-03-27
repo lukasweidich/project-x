@@ -7,6 +7,7 @@ import { Box, ChakraProvider } from "@chakra-ui/react";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import { SPACING_IN_PX } from "../utils/constants";
+import "../i18n";
 
 const app = ({ Component, pageProps }: AppProps) => {
 	return (
