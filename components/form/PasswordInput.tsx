@@ -16,7 +16,7 @@ const PasswordInput = ({ ...props }: ComponentWithAs<"input", InputProps>) => {
 		<InputGroup>
 			<Input {...props} type={showPassword ? "text" : "password"} />
 			<InputRightElement>
-				<Button onClick={handleClick} size="xs">
+				<Button onClick={handleClick} size="xs" tabIndex={-1}>
 					{showPassword ? <ViewOffIcon /> : <ViewIcon />}
 				</Button>
 			</InputRightElement>

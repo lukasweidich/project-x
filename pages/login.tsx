@@ -13,7 +13,12 @@ import PasswordInput from "../components/form/PasswordInput";
 import { useDispatch } from "react-redux";
 import { saveCookie } from "../utils/cookies";
 import { logIn } from "../actions/authActions";
-import { CookieNames, PathNames, REDIRECT_PARAM } from "../utils/constants";
+import {
+	CookieNames,
+	PathNames,
+	REDIRECT_PARAM,
+	SPACING_IN_PX,
+} from "../utils/constants";
 import { useRouter } from "next/dist/client/router";
 import useRedirectParam from "../hooks/useRedirectParam";
 import {
@@ -48,7 +53,7 @@ const login = () => {
 
 	return (
 		<Container>
-			<Box borderRadius="lg" borderWidth="1px" p="6">
+			<Box borderRadius="lg" borderWidth="1px" p={SPACING_IN_PX}>
 				<form onSubmit={(e) => handleLogIn(e)}>
 					<SimpleGrid columns={1} spacing={6}>
 						<Heading>Login</Heading>

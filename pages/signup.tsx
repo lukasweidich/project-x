@@ -15,7 +15,7 @@ import useRedirectParam from "../hooks/useRedirectParam";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import InternalLink from "../components/link/InternalLink";
 import { createUserInDb } from "../utils/api";
-import { PathNames, REDIRECT_PARAM } from "../utils/constants";
+import { PathNames, REDIRECT_PARAM, SPACING_IN_PX } from "../utils/constants";
 const { LOGIN } = PathNames;
 
 const signup = () => {
@@ -49,7 +49,7 @@ const signup = () => {
 
 	return (
 		<Container>
-			<Box borderRadius="lg" borderWidth="1px" p="6">
+			<Box borderRadius="lg" borderWidth="1px" p={SPACING_IN_PX}>
 				<form onSubmit={(e) => handleLogIn(e)}>
 					<SimpleGrid columns={1} spacing={6}>
 						<Heading>Sign Up</Heading>

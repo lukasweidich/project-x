@@ -8,13 +8,16 @@ import { rootReducer } from "./reducers/rootReducer";
 import { CookieNames } from "./utils/constants";
 const { composeWithDevTools } = require("redux-devtools-extension");
 import { getCookie } from "./utils/cookies";
-const { USER, TOKEN } = CookieNames;
+import { InitialThemeReducerStateInterface } from "./reducers/themeReducer";
+const { USER, TOKEN, THEME } = CookieNames;
 
 const tokenFromCookies = getCookie(TOKEN);
 const userFromCookies = getCookie(USER);
+const themeFromCookies = getCookie(THEME) ?? "light";
 
 export interface InitialStoreInterface {
 	auth: InitialAuthReducerStateInterface;
+	theme: InitialThemeReducerStateInterface;
 }
 
 const initialStore: InitialStoreInterface = {
@@ -22,6 +25,9 @@ const initialStore: InitialStoreInterface = {
 		...initialAuthReducerState,
 		token: tokenFromCookies,
 		user: userFromCookies,
+	},
+	theme: {
+		colorMode: themeFromCookies,
 	},
 };
 
