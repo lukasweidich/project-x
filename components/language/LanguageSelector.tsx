@@ -24,7 +24,7 @@ const LanguageSelector = () => {
 	};
 
 	return (
-		<Menu>
+		<Menu autoSelect={false} matchWidth>
 			<MenuButton as={Button}>
 				<CountryFlag country={country} />
 			</MenuButton>

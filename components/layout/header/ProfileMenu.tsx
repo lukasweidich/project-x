@@ -31,7 +31,7 @@ const ProfileMenu = () => {
 	};
 
 	return (
-		<Menu>
+		<Menu autoSelect={false}>
 			<MenuButton>
 				<Avatar name={fullName} />
 			</MenuButton>
