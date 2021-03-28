@@ -1,12 +1,10 @@
-import { Button } from "@chakra-ui/button";
 import React from "react";
 import { UserInterface } from "../db/types/User";
 import { protectRoute } from "../utils/auth/pageAuth";
-import { useDispatch } from "react-redux";
-import { logOut } from "../actions/authActions";
-import { useRouter } from "next/router";
-import { PathNames } from "../utils/constants";
-const { ROOT } = PathNames;
+import Container from "./../components/layout/Container";
+import { Heading, Text } from "@chakra-ui/layout";
+import { useTranslation } from "react-i18next";
+import TitleAndDesc from "./../components/meta/TitleAndDesc";
 
 export const getServerSideProps = protectRoute(
 	async (user: UserInterface, token: string) => {
@@ -17,21 +15,15 @@ export const getServerSideProps = protectRoute(
 	[],
 );
 
-const index = ({ user: userString, token }) => {
-	const dispatch = useDispatch();
-	const router = useRouter();
-
-	const handleLogOut = async () => {
-		await dispatch(logOut());
-		await router.push(ROOT);
-	};
-
-	const user: UserInterface = JSON.parse(userString);
+const index = () => {
+	const { t } = useTranslation();
 	return (
 		<>
-			<h3>Good to see you, {user.firstName}!</h3>
-			<p>This route can only be accessed when logged in.</p>
-			<Button onClick={() => handleLogOut()}>Log Out</Button>
+			<TitleAndDesc title={t("common:app-name")} desc={t("index:desc")} />
+			<Container>
+				<Heading>{t("index:title", { name: t("common:app-name") })}</Heading>
+				<Text>{t("index:desc")}</Text>
+			</Container>
 		</>
 	);
 };

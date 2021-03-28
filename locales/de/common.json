@@ -1,0 +1,7 @@
+{
+	"app-name": "Project X",
+	"actions": {
+		"switch-theme": "Theme wechseln",
+		"switch-language": "Sprache wechseln"
+	}
+}

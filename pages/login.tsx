@@ -30,6 +30,7 @@ import InternalLink from "../components/link/InternalLink";
 const { COOKIE_CONSENT } = CookieNames;
 const { SIGNUP } = PathNames;
 import { useTranslation } from "react-i18next";
+import TitleAndDesc from "../components/meta/TitleAndDesc";
 
 const login = () => {
 	const { t } = useTranslation();
@@ -57,58 +58,60 @@ const login = () => {
 	};
 
 	return (
-		<Container>
-			<Box borderRadius="lg" borderWidth="1px" p={SPACING_IN_PX}>
-				<form onSubmit={(e) => handleLogIn(e)}>
-					<SimpleGrid columns={1} spacing={6}>
-						<Heading>{t("userAuth:login.title")}</Heading>
-						<Text color="gray.500">{t("userAuth:login.desc")}</Text>
-						<FormControl id="username" isRequired>
-							<FormLabel>{t("userAuth:attributes.username.label")}</FormLabel>
-							<Input
-								placeholder={t("userAuth:attributes.username.placeholder")}
-								type="text"
-								value={username}
-								onChange={(e) => setUsername(e.target.value)}
-								required
-							/>
-						</FormControl>
-						<FormControl id="password" isRequired>
-							<FormLabel>{t("userAuth:attributes.password.label")}</FormLabel>
-							<PasswordInput
-								//@ts-ignore
-								placeholder={t("userAuth:attributes.password.placeholder")}
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								required
-							/>
-							<FormHelperText>
-								<InternalLink href="#">
-									{t("userAuth:login.forgotPassword")}
+		<>
+			<TitleAndDesc title={t("user:login.title")} desc={t("user:login.desc")} />
+			<Container>
+				<Box borderRadius="lg" borderWidth="1px" p={SPACING_IN_PX}>
+					<form onSubmit={(e) => handleLogIn(e)}>
+						<SimpleGrid columns={1} spacing={6}>
+							<Heading>{t("user:login.title")}</Heading>
+							<Text>{t("user:login.desc")}</Text>
+							<FormControl id="username" isRequired>
+								<FormLabel>{t("user:attributes.username.label")}</FormLabel>
+								<Input
+									placeholder={t("user:attributes.username.placeholder")}
+									type="text"
+									value={username}
+									onChange={(e) => setUsername(e.target.value)}
+									required
+								/>
+							</FormControl>
+							<FormControl id="password" isRequired>
+								<FormLabel>{t("user:attributes.password.label")}</FormLabel>
+								<PasswordInput
+									//@ts-ignore
+									placeholder={t("user:attributes.password.placeholder")}
+									value={password}
+									onChange={(e) => setPassword(e.target.value)}
+									required
+								/>
+								<FormHelperText>
+									<InternalLink href="#">
+										{t("user:login.forgotPassword")}
+									</InternalLink>
+								</FormHelperText>
+							</FormControl>
+							<Button
+								disabled={!credentialsEntered}
+								type="submit"
+								isLoading={loggingIn}
+							>
+								{t("user:login.title")}
+							</Button>
+							<Divider />
+							<FormControl id="signup">
+								<FormLabel>{t("user:signup.cta")}</FormLabel>
+								<InternalLink href={`${SIGNUP}?${REDIRECT_PARAM}=${redirect}`}>
+									<Button variant="outline" style={{ width: "100%" }}>
+										{t("user:signup.title")}
+									</Button>
 								</InternalLink>
-							</FormHelperText>
-						</FormControl>
-						<Button
-							disabled={!credentialsEntered}
-							type="submit"
-							isLoading={loggingIn}
-							loadingText="Logging In"
-						>
-							{t("userAuth:login.title")}
-						</Button>
-						<Divider />
-						<FormControl id="signup">
-							<FormLabel>{t("userAuth:signup.cta")}</FormLabel>
-							<InternalLink href={`${SIGNUP}?${REDIRECT_PARAM}=${redirect}`}>
-								<Button variant="outline" style={{ width: "100%" }}>
-									{t("userAuth:signup.title")}
-								</Button>
-							</InternalLink>
-						</FormControl>
-					</SimpleGrid>
-				</form>
-			</Box>
-		</Container>
+							</FormControl>
+						</SimpleGrid>
+					</form>
+				</Box>
+			</Container>
+		</>
 	);
 };
 

@@ -8,11 +8,13 @@ import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import { SPACING_IN_PX } from "../utils/constants";
 import "../i18n";
+import DefaultSEO from "../components/meta/DefaultSEO";
 
 const app = ({ Component, pageProps }: AppProps) => {
 	return (
 		<ChakraProvider>
 			<Provider store={store}>
+				<DefaultSEO />
 				<Header />
 				<main>
 					<Box

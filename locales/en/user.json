@@ -5,11 +5,21 @@
 		"cta": "Already have an Account?",
 		"forgotPassword": "Forgot Password?"
 	},
+	"logout": {
+		"title": "Log Out"
+	},
 	"signup": {
 		"title": "Sign Up",
 		"desc": "Enter your information.",
 		"cta": "Don't have an Account?"
 	},
+	"menu": {
+		"profile": "Profile",
+		"help": "Help",
+		"account": "My Account",
+		"bug": "Report a Bug"
+	},
+	"greeting": "Hello {{name}}, good to see you!",
 	"attributes": {
 		"firstName": { "label": "First Name", "placeholder": "Enter First Name" },
 		"lastName": { "label": "Last Name", "placeholder": "Enter Last Name" },

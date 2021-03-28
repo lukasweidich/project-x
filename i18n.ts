@@ -2,15 +2,23 @@ import i18n from "i18next";
 import BrowserLanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
-import deUserAuth from "./locales/de/userAuth.json";
-import enUserAuth from "./locales/en/userAuth.json";
+import deUser from "./locales/de/user.json";
+import deIndex from "./locales/de/index.json";
+import deCommon from "./locales/de/common.json";
+import enUser from "./locales/en/user.json";
+import enIndex from "./locales/en/index.json";
+import enCommon from "./locales/en/common.json";
 
 const resources = {
 	en: {
-		userAuth: enUserAuth,
+		user: enUser,
+		index: enIndex,
+		common: enCommon,
 	},
 	de: {
-		userAuth: deUserAuth,
+		user: deUser,
+		index: deIndex,
+		common: deCommon,
 	},
 };
 

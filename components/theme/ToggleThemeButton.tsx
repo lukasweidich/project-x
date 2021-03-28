@@ -5,33 +5,32 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "./../../actions/themeActions";
 import { InitialStoreInterface } from "./../../store";
+import { useTranslation } from "react-i18next";
 
 const ToggleThemeButton = () => {
+	const { t } = useTranslation();
+
 	const { colorMode: colorModeFromState } = useSelector(
 		(state: InitialStoreInterface) => state.theme,
 	);
 
+	const { colorMode, toggleColorMode, setColorMode } = useColorMode();
+	const dispatch = useDispatch();
+
 	useEffect(() => {
 		setColorMode(colorModeFromState);
 	}, [colorModeFromState]);
-
-	const { colorMode, toggleColorMode, setColorMode } = useColorMode();
-	const dispatch = useDispatch();
 
 	const handleToggleColorMode = () => {
 		toggleColorMode();
 		dispatch(setTheme(colorMode === "dark" ? "light" : "dark"));
 	};
 
-	const ariaLabelForIconButton = `Click to switch to ${
-		colorMode === "light" ? "dark" : "light"
-	} mode.`;
-
 	return (
 		<IconButton
-			aria-label={ariaLabelForIconButton}
+			aria-label={t("common:actions.switch-theme")}
 			onClick={handleToggleColorMode}
-			icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+			icon={colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
 		/>
 	);
 };

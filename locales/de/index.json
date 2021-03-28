@@ -1,0 +1,4 @@
+{
+	"title": "Das ist {{name}}",
+	"desc": "Eine React/Typescript/Next.js Anwendung, die Funktionen wie Authentifizierung, Autorisierung, Theming und i18n demonstiert. Erstellt mit Chakra UI."
+}

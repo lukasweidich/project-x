@@ -1,15 +1,25 @@
 {
 	"login": {
 		"title": "Anmelden",
-		"desc": "Bitte mit Nutzername und Passwort anmelden.",
+		"desc": "Mit Nutzernamen und Passwort anmelden.",
 		"cta": "Mit bestehendem Account anmelden?",
 		"forgotPassword": "Passwort vergessen?"
+	},
+	"logout": {
+		"title": "Abmelden"
 	},
 	"signup": {
 		"title": "Registrieren",
 		"desc": "Daten angeben und Account erstellen.",
 		"cta": "Noch keinen Account?"
 	},
+	"menu": {
+		"profile": "Profil",
+		"help": "Hilfe",
+		"account": "Mein Account",
+		"bug": "Einen Fehler melden"
+	},
+	"greeting": "Hallo {{name}}, schön dass Du hier bist!",
 	"attributes": {
 		"firstName": { "label": "Vorname", "placeholder": "Vornamen eingeben" },
 		"lastName": { "label": "Nachname", "placeholder": "Nachnamen eingeben" },

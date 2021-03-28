@@ -17,8 +17,11 @@ import InternalLink from "../components/link/InternalLink";
 import { createUserInDb } from "../utils/api";
 import { PathNames, REDIRECT_PARAM, SPACING_IN_PX } from "../utils/constants";
 const { LOGIN } = PathNames;
+import { useTranslation } from "react-i18next";
+import TitleAndDesc from "../components/meta/TitleAndDesc";
 
 const signup = () => {
+	const { t } = useTranslation();
 	const [firstName, setFirstName] = useState<string>("");
 	const [lastName, setLastName] = useState<string>("");
 	const [username, setUsername] = useState<string>("");
@@ -51,84 +54,91 @@ const signup = () => {
 	};
 
 	return (
-		<Container>
-			<Box borderRadius="lg" borderWidth="1px" p={SPACING_IN_PX}>
-				<form onSubmit={(e) => handleSignIn(e)}>
-					<SimpleGrid columns={1} spacing={6}>
-						<Heading>Sign Up</Heading>
-						<Text color="gray.500">Enter your information.</Text>
-						<FormControl id="firstname" isRequired>
-							<FormLabel>First Name</FormLabel>
-							<Input
-								placeholder="Enter First Name"
-								type="text"
-								value={firstName}
-								onChange={(e) => setFirstName(e.target.value)}
-								required
-							/>
-						</FormControl>
-						<FormControl id="lastname" isRequired>
-							<FormLabel>Last Name</FormLabel>
-							<Input
-								placeholder="Enter Last Name"
-								type="text"
-								value={lastName}
-								onChange={(e) => setLastName(e.target.value)}
-								required
-							/>
-						</FormControl>
-						<FormControl id="username" isRequired>
-							<FormLabel>Username</FormLabel>
-							<Input
-								placeholder="Enter Username"
-								type="text"
-								value={username}
-								onChange={(e) => setUsername(e.target.value)}
-								required
-							/>
-						</FormControl>
-						<FormControl id="password" isRequired>
-							<FormLabel>Password</FormLabel>
-							<PasswordInput
-								//@ts-ignore
-								placeholder="Enter Password"
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								required
-							/>
-						</FormControl>
-						<FormControl id="password" isRequired>
-							<FormLabel>Repeat Password</FormLabel>
-							<PasswordInput
-								//@ts-ignore
-								isInvalid={!passwordsMatch}
-								placeholder="Enter Password again"
-								value={repeatPassword}
-								onChange={(e) => setRepeatPassword(e.target.value)}
-								required
-							/>
-						</FormControl>
-						<Button
-							disabled={!credentialsEntered}
-							type="submit"
-							isLoading={signingUp}
-							loadingText="Signing Up"
-						>
-							Sign Up
-						</Button>
-						<Divider />
-						<FormControl id="signup">
-							<FormLabel>Already have an Account?</FormLabel>
-							<InternalLink href={`${LOGIN}?${REDIRECT_PARAM}=${redirect}`}>
-								<Button variant="outline" style={{ width: "100%" }}>
-									Log In
-								</Button>
-							</InternalLink>
-						</FormControl>
-					</SimpleGrid>
-				</form>
-			</Box>
-		</Container>
+		<>
+			<TitleAndDesc
+				title={t("user:signup.title")}
+				desc={t("user:signup.desc")}
+			/>
+			<Container>
+				<Box borderRadius="lg" borderWidth="1px" p={SPACING_IN_PX}>
+					<form onSubmit={(e) => handleSignIn(e)}>
+						<SimpleGrid columns={1} spacing={6}>
+							<Heading>{t("user:signup.title")}</Heading>
+							<Text>{t("user:signup.desc")}</Text>
+							<FormControl id="firstname" isRequired>
+								<FormLabel>{t("user:attributes.firstName.label")}</FormLabel>
+								<Input
+									placeholder={t("user:attributes.firstName.placeholder")}
+									type="text"
+									value={firstName}
+									onChange={(e) => setFirstName(e.target.value)}
+									required
+								/>
+							</FormControl>
+							<FormControl id="lastname" isRequired>
+								<FormLabel>{t("user:attributes.lastName.label")}</FormLabel>
+								<Input
+									placeholder={t("user:attributes.lastName.placeholder")}
+									type="text"
+									value={lastName}
+									onChange={(e) => setLastName(e.target.value)}
+									required
+								/>
+							</FormControl>
+							<FormControl id="username" isRequired>
+								<FormLabel>{t("user:attributes.username.label")}</FormLabel>
+								<Input
+									placeholder={t("user:attributes.username.placeholder")}
+									type="text"
+									value={username}
+									onChange={(e) => setUsername(e.target.value)}
+									required
+								/>
+							</FormControl>
+							<FormControl id="password" isRequired>
+								<FormLabel>{t("user:attributes.password.label")}</FormLabel>
+								<PasswordInput
+									//@ts-ignore
+									placeholder={t("user:attributes.password.placeholder")}
+									value={password}
+									onChange={(e) => setPassword(e.target.value)}
+									required
+								/>
+							</FormControl>
+							<FormControl id="repeatPassword" isRequired>
+								<FormLabel>
+									{t("user:attributes.repeatPassword.label")}
+								</FormLabel>
+								<PasswordInput
+									//@ts-ignore
+									isInvalid={!passwordsMatch}
+									placeholder={t("user:attributes.repeatPassword.placeholder")}
+									value={repeatPassword}
+									onChange={(e) => setRepeatPassword(e.target.value)}
+									required
+								/>
+							</FormControl>
+							<Button
+								disabled={!credentialsEntered}
+								type="submit"
+								isLoading={signingUp}
+							>
+								{t("user:signup.title")}
+							</Button>
+							<Divider />
+							<FormControl id="signup">
+								<FormLabel>{t("user:login.cta")}</FormLabel>
+								<InternalLink href={`${LOGIN}?${REDIRECT_PARAM}=${redirect}`}>
+									<Button variant="outline" style={{ width: "100%" }}>
+										{t("user:login.title")}
+									</Button>
+								</InternalLink>
+							</FormControl>
+						</SimpleGrid>
+					</form>
+				</Box>
+			</Container>
+		</>
 	);
 };
 
