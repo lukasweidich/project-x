@@ -10,3 +10,7 @@ export enum ThemeActions {
 export enum LanguageActions {
 	SET_LANGUAGE = "SET_LANGUAGE",
 }
+
+export enum UserActions {
+	UPDATE_USER = "UPDATE_USER",
+}

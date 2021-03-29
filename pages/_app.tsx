@@ -9,11 +9,13 @@ import Header from "../components/layout/Header";
 import { SPACING_IN_PX } from "../utils/constants";
 import "../i18n";
 import DefaultSEO from "../components/meta/DefaultSEO";
+import CheckAuthAndUpdateUser from "../components/misc/CheckAuthAndUpdateUser";
 
 const app = ({ Component, pageProps }: AppProps) => {
 	return (
 		<ChakraProvider>
 			<Provider store={store}>
+				<CheckAuthAndUpdateUser />
 				<DefaultSEO />
 				<Header />
 				<main>

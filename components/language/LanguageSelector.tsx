@@ -7,6 +7,10 @@ import { SUPPORTED_LANGUAGES } from "../../utils/constants";
 import { Select } from "@chakra-ui/react";
 import useIsClientSide from "../../hooks/useIsClientSide";
 import { Language } from "../../reducers/i18nReducer";
+import {
+	makeActiveLanguageLast,
+	sortLanguagesByNameAsc,
+} from "../../utils/misc";
 
 const LanguageSelector = () => {
 	const { i18n } = useTranslation();
@@ -25,6 +29,8 @@ const LanguageSelector = () => {
 
 	/**
 	 * since correct language is set on client side, do not render on server side, as it only shows the default language
+	 *
+	 * sort languages alphabetically ascending, then make active language bottom most
 	 */
 	return (
 		isClientSide && (
@@ -34,14 +40,13 @@ const LanguageSelector = () => {
 				}
 				value={languageFromState}
 			>
-				{SUPPORTED_LANGUAGES.sort(
-					(a: Language, b: Language) =>
-						Number(a === languageFromState) - Number(b === languageFromState),
-				).map((language: Language, i) => (
-					<option key={i} value={language}>
-						{language.toUpperCase()}
-					</option>
-				))}
+				{SUPPORTED_LANGUAGES.sort(sortLanguagesByNameAsc)
+					.sort(makeActiveLanguageLast(languageFromState))
+					.map((language: Language, i) => (
+						<option key={i} value={language}>
+							{language.toUpperCase()}
+						</option>
+					))}
 			</Select>
 		)
 	);

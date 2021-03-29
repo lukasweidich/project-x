@@ -1,4 +1,5 @@
 import { UserInterface } from "../db/types/User";
+import { Language } from "../reducers/i18nReducer";
 import { UserRequirementFunction } from "./auth/apiAuth";
 
 export const isEqual = (a: string | number, b: string | number): boolean =>
@@ -26,3 +27,11 @@ export const doesUserMeetAllRequirements = async (
 	}
 	return true;
 };
+
+export const sortLanguagesByNameAsc = (a: Language, b: Language) =>
+	a.localeCompare(b);
+
+export const makeActiveLanguageLast = (languageFromState: Language) => (
+	a: Language,
+	b: Language,
+) => Number(a === languageFromState) - Number(b === languageFromState);

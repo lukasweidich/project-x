@@ -38,3 +38,15 @@ export const createUserInDb = async (
 	});
 	return user;
 };
+
+export const getUser = async (userId, token): Promise<UserInterface> => {
+	const {
+		data: { user },
+	}: { data: { user: UserInterface } } = await axios.get(
+		`${API_USERS}/${userId}`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		},
+	);
+	return user;
+};

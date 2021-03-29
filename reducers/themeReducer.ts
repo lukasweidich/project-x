@@ -6,11 +6,11 @@ export interface InitialThemeReducerStateInterface {
 	colorMode: ColorMode;
 }
 
-export const initialAuthReducerState: InitialThemeReducerStateInterface = {
+export const initialUserReducerState: InitialThemeReducerStateInterface = {
 	colorMode: "dark",
 };
 
-const authReducer = (state = initialAuthReducerState, action) => {
+const authReducer = (state = initialUserReducerState, action) => {
 	const { type, payload } = action;
 	switch (type) {
 		case SET_THEME:
