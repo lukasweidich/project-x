@@ -1,11 +1,15 @@
 import Cookies from "js-cookie";
-import { EXPIRY_IN_DAYS, CookieNames } from "./constants";
+import {
+	EXPIRY_IN_DAYS,
+	CookieNames,
+	USE_COOKIES_WITHOUT_CONSENT,
+} from "./constants";
 const { COOKIE_CONSENT } = CookieNames;
 
 export const saveCookie = (
 	key: string,
 	value: any,
-	allowCookies: boolean = false,
+	allowCookies: boolean = USE_COOKIES_WITHOUT_CONSENT,
 ): void => {
 	if (isCookieAvailable(COOKIE_CONSENT) || allowCookies) {
 		Cookies.set(key, JSON.stringify(value), {

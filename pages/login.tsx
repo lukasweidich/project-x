@@ -50,7 +50,6 @@ const login = () => {
 		e.preventDefault();
 		if (credentialsEntered) {
 			setLoggingIn(true);
-			saveCookie(COOKIE_CONSENT, true, true);
 			await dispatch(logIn(username, password));
 			await router.push(redirect);
 			setLoggingIn(false);

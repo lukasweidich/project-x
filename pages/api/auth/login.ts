@@ -15,7 +15,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			try {
 				if (username && password) {
 					const user: UserInterface = await User.findOne({ username });
-					// @ts-ignore
 					if (user && (await user.matchPassword(password))) {
 						res.status(200).json({
 							user,
