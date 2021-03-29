@@ -9,6 +9,7 @@ export interface UserInterface extends Document {
 	lastName: string;
 	username: string;
 	password: string;
+	avatar?: string;
 	isAdmin?: boolean;
 }
 
@@ -20,6 +21,7 @@ const UserSchema = new Schema<UserInterface, UserModel>(
 		lastName: { type: String, required: true },
 		username: { type: String, required: true, unique: true },
 		password: { type: String, required: true },
+		avatar: { type: String, default: "" },
 		isAdmin: { type: Boolean, default: false },
 	},
 	{

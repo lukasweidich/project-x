@@ -15,7 +15,9 @@
 	},
 	"menu": {
 		"profile": "Profil",
-		"help": "Hilfe",
+		"about": "Über",
+		"code": "Quellcode ansehen",
+		"readme": "README lesen",
 		"account": "Mein Account",
 		"bug": "Einen Fehler melden"
 	},

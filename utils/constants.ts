@@ -21,6 +21,11 @@ export enum CookieNames {
 	LANGUAGE = "lng",
 }
 
+export const PathNamesWithoutUser: Array<PathNames | String> = [
+	PathNames.LOGIN,
+	PathNames.SIGNUP,
+];
+
 export const EXPIRY_IN_DAYS: number = 30;
 export const SPACING_IN_PX: number = 6;
 export const REDIRECT_PARAM: string = "rdr";

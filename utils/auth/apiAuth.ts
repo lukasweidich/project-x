@@ -13,10 +13,15 @@ interface UserIdAndBearerTokenInterface {
 	token: string | null;
 }
 
-interface ValidateBearerTokenInterface {
+interface ValidateAuthorizationInterface {
 	user?: UserInterface;
 	isValid: boolean;
 	token?: string;
+}
+
+interface ValidateBearerTokenInterface {
+	user?: UserInterface;
+	isValid: boolean;
 }
 
 export const executeIfUserRequirementsMet = async (
@@ -45,7 +50,7 @@ export const continueIfAuthenticatedWithBearerToken = async (
 	fn = async (user: UserInterface, token: string) => null,
 ): Promise<void> => {
 	if (authorization && authorization.startsWith("Bearer")) {
-		const { user, token, isValid } = await validateBearerToken(authorization);
+		const { user, token, isValid } = await validateAuthorization(authorization);
 		if (isValid) {
 			await fn(user, token);
 		} else {
@@ -58,23 +63,37 @@ export const continueIfAuthenticatedWithBearerToken = async (
 	}
 };
 
-const validateBearerToken = async (
+const validateAuthorization = async (
 	authorization: string,
-): Promise<ValidateBearerTokenInterface> => {
+): Promise<ValidateAuthorizationInterface> => {
 	try {
-		const { id, token } = getUserIdAndBearerTokenFromAuth(authorization);
-		const userFromAuth = await getUserById(id);
-		return { user: userFromAuth, token, isValid: !!userFromAuth };
+		const token = getTokenFromAuthorization(authorization);
+		const { user, isValid } = await validateBearerToken(token);
+		return { user, token, isValid };
 	} catch (error) {
 		return { isValid: false };
 	}
 };
 
+export const validateBearerToken = async (
+	token: string,
+): Promise<ValidateBearerTokenInterface> => {
+	try {
+		const { id } = getUserIdAndBearerTokenFromAuth(token);
+		const userFromAuth = await getUserById(id);
+		return { user: userFromAuth, isValid: !!userFromAuth };
+	} catch (error) {
+		return { isValid: false };
+	}
+};
+
+const getTokenFromAuthorization = (authorization: string): string =>
+	authorization.split(" ")[1];
+
 const getUserIdAndBearerTokenFromAuth = (
-	authorization: string,
+	token: string,
 ): UserIdAndBearerTokenInterface => {
 	try {
-		const token = authorization.split(" ")[1];
 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
 		const { id } = decoded;
 		return { id, token };

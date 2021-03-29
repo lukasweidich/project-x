@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
-import { Button } from "@chakra-ui/button";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { setLanguage } from "./../../actions/languageActions";
 import useLanguage from "./../../hooks/useLanguage";
-import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
 import { SUPPORTED_LANGUAGES } from "../../utils/constants";
-import CountryFlag from "./CountryFlag";
-import { getCountryFromLanguage } from "./../../reducers/i18nReducer";
+import { Select } from "@chakra-ui/react";
+import useIsClientSide from "../../hooks/useIsClientSide";
+import { Language } from "../../reducers/i18nReducer";
 
 const LanguageSelector = () => {
 	const { i18n } = useTranslation();
-	const { language: languageFromState, country } = useLanguage();
+	const { language: languageFromState } = useLanguage();
 	const dispatch = useDispatch();
+	const isClientSide = useIsClientSide();
 
 	useEffect(() => {
 		handleLanguageChange(languageFromState);
@@ -23,21 +23,27 @@ const LanguageSelector = () => {
 		dispatch(setLanguage(language));
 	};
 
+	/**
+	 * since correct language is set on client side, do not render on server side, as it only shows the default language
+	 */
 	return (
-		<Menu autoSelect={false} matchWidth>
-			<MenuButton as={Button}>
-				<CountryFlag country={country} />
-			</MenuButton>
-			<MenuList>
-				{SUPPORTED_LANGUAGES.filter(
-					(language) => language !== languageFromState,
-				).map((language, i) => (
-					<MenuItem onClick={() => handleLanguageChange(language)} key={i}>
-						<CountryFlag country={getCountryFromLanguage(language)} />
-					</MenuItem>
+		isClientSide && (
+			<Select
+				onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+					handleLanguageChange(e.target.value)
+				}
+				value={languageFromState}
+			>
+				{SUPPORTED_LANGUAGES.sort(
+					(a: Language, b: Language) =>
+						Number(a === languageFromState) - Number(b === languageFromState),
+				).map((language: Language, i) => (
+					<option key={i} value={language}>
+						{language.toUpperCase()}
+					</option>
 				))}
-			</MenuList>
-		</Menu>
+			</Select>
+		)
 	);
 };
 

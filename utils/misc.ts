@@ -9,16 +9,20 @@ export const doesUserMeetAllRequirements = async (
 	userRequirements: UserRequirementFunction[],
 ): Promise<boolean> => {
 	if (userRequirements.length > 0) {
-		const getFulfilledRequirements = async () => {
-			return Promise.all(
-				userRequirements.map((requirement) => requirement(user)),
+		if (!!user) {
+			const getFulfilledRequirements = async () => {
+				return Promise.all(
+					userRequirements.map((requirement) => requirement(user)),
+				);
+			};
+			const fulfilledRequirements = await getFulfilledRequirements();
+			const allRequirementsMet = fulfilledRequirements.every(
+				(fulfilledRequirement) => fulfilledRequirement,
 			);
-		};
-		const fulfilledRequirements = await getFulfilledRequirements();
-		const allRequirementsMet = fulfilledRequirements.every(
-			(fulfilledRequirement) => fulfilledRequirement,
-		);
-		return allRequirementsMet;
+			return allRequirementsMet;
+		} else {
+			return false;
+		}
 	}
 	return true;
 };

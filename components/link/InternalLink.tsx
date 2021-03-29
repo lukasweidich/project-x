@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 
 const InternalLink = ({
 	href = "",
-	children,
+	children = "",
 	...rest
 }: {
-	href: string;
-	children: string | React.ReactNode;
+	href?: string;
+	children?: string | React.ReactNode;
 	[key: string]: any;
 }) => {
 	const router = useRouter();

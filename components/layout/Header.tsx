@@ -1,17 +1,22 @@
 import { Box, Divider, Heading, Link, Wrap, WrapItem } from "@chakra-ui/layout";
 import React from "react";
 import useAuth from "../../hooks/useAuth";
-import { SPACING_IN_PX } from "../../utils/constants";
+import { PathNamesWithoutUser, SPACING_IN_PX } from "../../utils/constants";
 import InternalLink from "../link/InternalLink";
 import Container from "./Container";
 import ProfileMenu from "./header/ProfileMenu";
 import { PathNames } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 const { ROOT } = PathNames;
 
 const Header = () => {
 	const { isLoggedIn } = useAuth();
+	const router = useRouter();
+	const isPathNameWithoutUser = PathNamesWithoutUser.includes(router.pathname);
 	const { t } = useTranslation();
+
+	const showProfileMenu = isLoggedIn && !isPathNameWithoutUser;
 	return (
 		<header>
 			<Container>
@@ -24,7 +29,7 @@ const Header = () => {
 								</Link>
 							</InternalLink>
 						</WrapItem>
-						<WrapItem>{isLoggedIn && <ProfileMenu />}</WrapItem>
+						<WrapItem>{showProfileMenu && <ProfileMenu />}</WrapItem>
 					</Wrap>
 				</Box>
 			</Container>

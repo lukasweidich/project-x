@@ -2,11 +2,11 @@ import React from "react";
 
 const ExternalLink = ({
 	href = "",
-	children,
+	children = <></>,
 	...rest
 }: {
-	href: string;
-	children: string | React.ReactNode;
+	href?: string;
+	children?: string | React.ReactNode;
 	[key: string]: any;
 }) => {
 	return (
