@@ -27,7 +27,7 @@ const DefaultSEO = () => {
 			<meta name="ICBM" content={`${latitude}, ${longitude}`} />
 			<meta
 				name="viewport"
-				content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+				content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
 			/>
 			<meta property="og:site_name" content={name} />
 			<meta property="og:url" content={url} />

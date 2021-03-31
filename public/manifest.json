@@ -1,6 +1,6 @@
 {
-	"name": "next-pwa",
-	"short_name": "next-pwa",
+	"name": "Project X",
+	"short_name": "Project X",
 	"display": "standalone",
 	"orientation": "portrait",
 	"theme_color": "#FFFFFF",
